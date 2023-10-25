@@ -12,9 +12,9 @@ class Unidades extends Migration
     {
         Schema::create($this->table, function(Blueprint $table){
             $table->bigIncrements('id');
-            $table->string('nome_fantasia');
-            $table->string('razao_social');
-            $table->string('cnpj',15);
+            $table->string('nome_fantasia')->unique();
+            $table->string('razao_social')->unique();
+            $table->string('cnpj',18)->unique();
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });

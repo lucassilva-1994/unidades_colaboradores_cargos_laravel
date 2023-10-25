@@ -12,12 +12,14 @@ class Colaboradores extends Migration
         Schema::create($this->table, function(Blueprint $table){
             $table->bigIncrements('id');
             $table->unsignedBigInteger('unidade_id');
-            $table->foreign('unidade_id')->references('id')->on('unidades')->onDelete('cascade');
+            $table->unsignedBigInteger('cargo_id');
             $table->string('nome',100);
             $table->string('cpf',14);
             $table->string('email',100);
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
+            $table->foreign('unidade_id')->references('id')->on('unidades')->onDelete('cascade');
+            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('cascade');
         });
     }
 
