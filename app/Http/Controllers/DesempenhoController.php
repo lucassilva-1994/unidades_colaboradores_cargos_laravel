@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DesempenhoRequest;
 use App\Models\CargoColaborador;
 use App\Models\Colaborador;
 use App\Models\HelperModel;
-use Illuminate\Http\Request;
 
 class DesempenhoController extends Controller
 {
     public function show(){
-        $desempenhos = CargoColaborador::orderByDesc('nota_desempenho')->get();
+        $desempenhos = CargoColaborador::orderByDesc('nota_desempenho')->paginate(10);
         return view('colaboradores.desempenho.show',compact('desempenhos'));
     }
 
@@ -21,10 +21,6 @@ class DesempenhoController extends Controller
         return view('colaboradores.desempenho.form', compact('desempenhos','desempenho','colaborador'));
     }
 
-    private function redirect($class, $message){
-        return redirect()->back()->with($class, $message);
-    }
-
     public function new(int $colaborador_id){
         return $this->desempenhos($colaborador_id);
     }
@@ -33,23 +29,15 @@ class DesempenhoController extends Controller
         return $this->desempenhos($id,$desempenho_id);
     }
 
-    public function create(Request $request){
-        $request->validate(
-            ['nota_desempenho' => 'required'],
-            ['nota_desempenho.required' => 'Nota é obrigatório']
-        );
+    public function create(DesempenhoRequest $request){
         if(HelperModel::setData($request->except('_token'), CargoColaborador::class))
-            return $this->redirect('success','Avaliação enviada.');
-        return $this->redirect('error','Falha ao enviar avaliação.');
+            return redirect()->route('colaborador.desempenho.show')->with('success','Sucesso.');
+        return redirect()->route('colaborador.desempenho.show')->with('error','Falha.');
     }
 
-    public function update(Request $request){
-        $request->validate(
-            ['nota_desempenho' => 'required'],
-            ['nota_desempenho.required' => 'Nota é obrigatório']
-        );
+    public function update(DesempenhoRequest $request){
         if(HelperModel::updatedata($request->only('id','nota_desempenho'),CargoColaborador::class,['id' => $request->id]))
-            return $this->redirect('success','Avaliação atualizada.');
-        return $this->redirect('error','Falha ao atualizar avaliação.');
+            return redirect()->route('colaborador.desempenho.show')->with('success','Sucesso.');
+        return redirect()->route('colaborador.desempenho.show')->with('error','Falha.');
     }
 }

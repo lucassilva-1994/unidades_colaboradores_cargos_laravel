@@ -37,18 +37,18 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Cargo:</th>
-                                <th>Criado em:</th>
-                                <th>Atualizado em:</th>
+                                <th>Cargo</th>
+                                <th>N° colaboradores</th>
+                                <th>Criado em</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($cargos as $cargo)
                                 <tr>
-                                    <td>{{ $cargo->cargo }}</td>
+                                    <td>{{ mb_strimwidth( $cargo->cargo, 0,30, "...")}}</td>
+                                    <td>{{ $cargo->colaboradores->count() }}</td>
                                     <td>{{ $cargo->created_at }}</td>
-                                    <td>{{ $cargo->updated_at }}</td>
                                     <td class="list-inline">
                                         <span class="list-inline-item  mb-2">
                                             <a href="{{ route('cargo.edit', $cargo->id) }}"

@@ -23,11 +23,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link-light" href="{{ route('colaborador.show') }}"><i
-                            <i class="bi bi-person-workspace"></i> Colaboradores</a>
+                            <i class="bi bi-people-fill"></i> Colaboradores</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link-light" href="{{ route('colaborador.desempenho.show') }}"><i
-                            <i class="bi bi-person-bounding-box"></i> Avaliações</a>
+                            <<i class="bi bi-chat-square-dots-fill"></i> Avaliações</a>
                     </li>
                 </ul>
             </div>

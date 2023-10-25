@@ -10,7 +10,7 @@ use App\Models\Unidade;
 class ColaboradorController extends Controller
 {
     public function show(){
-        $colaboradores = Colaborador::orderByDesc('id')->paginate(15);
+        $colaboradores = Colaborador::orderByDesc('id')->paginate(10);
         return view('colaboradores.show',compact('colaboradores'));
     }
 
@@ -40,7 +40,7 @@ class ColaboradorController extends Controller
             ['cpf.unique' => 'CPF já cadastrado','email.unique' => 'Email já cadastrado.']
         );
         if (Colaborador::createOrUpdate($request->except('_method')))
-            return $this->redirect('success', 'Salco com sucesso.');
+            return $this->redirect('success', 'Salvo com sucesso.');
         return $this->redirect('error', 'Erro ao salvar.');
     }
 
@@ -58,7 +58,7 @@ class ColaboradorController extends Controller
     }
 
     private function getUnidades(){
-        return Unidade::orderByDesc('nome_fantasia')->get();
+        return Unidade::orderByDesc('id')->get();
     }
 
     private function getcargos(){

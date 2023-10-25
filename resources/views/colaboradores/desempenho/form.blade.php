@@ -16,7 +16,7 @@
                 @endif
                 <input type="hidden" name="cargo_id" value="{{ $colaborador->cargo->id }}"/>
                 <input type="hidden" name="colaborador_id" value="{{ $colaborador->id }}"/>
-                <div class="mb-3 col-md-4">
+                <div class="mb-3 col-md-6">
                     <label class="form-label">Nome:</label>
                     <input type="text" class="form-control"
                         value="{{$colaborador->nome}}" readonly disabled/>
@@ -26,7 +26,7 @@
                     <input type="text" class="form-control"
                       value="{{$colaborador->cargo->cargo}}" readonly disabled/>
                 </div>
-                <div class="mb-3 col-md-3">
+                <div class="mb-3 col-md-1">
                     <label for="nota_desempenho" class="form-label">Nota:</label>
                     <input type="text" class="form-control" id="nota_desempenho" 
                         placeholder="Nota" name="nota_desempenho"

@@ -2,14 +2,14 @@
 @section('title', 'Todas as unidades')
 @section('content')
     <div class="d-flex justify-content-start">
-        @section('h1', 'Todas as unidades')
+    @section('h1', 'Todas as unidades')
+</div>
+<div class="d-flex justify-content-end">
+    <div class="col-md-2 d-grid">
+        <a class="btn btn-secondary m-1" href="{{ route('unidade.new') }}"><i class="bi bi-file-earmark-plus-fill"></i>
+            Novo</a>
     </div>
-    <div class="d-flex justify-content-end">
-        <div class="col-md-2 d-grid">
-            <a class="btn btn-secondary m-1" href="{{ route('unidade.new') }}"><i class="bi bi-file-earmark-plus-fill"></i>
-                Novo</a>
-        </div>
-    </div>
+</div>
 <div class="card">
     <div class="card-header">
         <h5>Listagem de unidades ({{ $unidades->count() }})</h5>
@@ -32,8 +32,8 @@
                         @foreach ($unidades as $unidade)
                             <tr>
                                 <td>{{ $unidade->id }}</td>
-                                <td>{{ $unidade->nome_fantasia }}</td>
-                                <td>{{ $unidade->razao_social }}</td>
+                                <td>{{ mb_strimwidth( $unidade->nome_fantasia, 0,30, "...")}}</td>
+                                <td>{{ mb_strimwidth( $unidade->razao_social, 0,30, "...")}}</td>
                                 <td>{{ $unidade->cnpj }}</td>
                                 <td>{{ $unidade->colaboradores->count() }}</td>
                                 <td class="list-inline">
@@ -58,11 +58,17 @@
             </div>
             <nav class="mt-3">
                 <ul class="pagination justify-content-center">
-                    <li class="">
+                    <li>
                         {{ $unidades->appends(request()->except('_token'))->links() }}
                     </li>
                 </ul>
             </nav>
+        </div>
+    @else
+        <div class="card-body">
+            <div>
+                <h4>Nenhuma unidade cadastrada.</h4>
+            </div>
         </div>
     @endif
 </div>

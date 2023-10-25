@@ -29,15 +29,16 @@
                         <tbody>
                             @foreach ($colaboradores as $colaborador)
                                 <tr>
-                                    <td>{{ $colaborador->nome }}</td>
+                                    <td>{{ mb_strimwidth( $colaborador->nome, 0,25, "...")}}</td>
                                     <td>{{ $colaborador->cpf }}</td>
-                                    <td>{{ $colaborador->email }}</td>
-                                    <td>{{ $colaborador->unidade->nome_fantasia }}</td>
+                                    <td>{{ mb_strimwidth( $colaborador->email, 0,25, "...")}}</td>
+                                    <td>{{ mb_strimwidth( $colaborador->unidade->nome_fantasia, 0,25, "...")}}</td>
                                     <td>{{ $colaborador->cargo->cargo }}</td>
                                     <td class="list-inline" style="width: 15%">
                                         <span class="list-inline-item mb-2">
                                             <a href="{{ route('colaborador.edit', $colaborador->id) }}"
-                                                class="btn btn-primary btn-sm" title="Editar"><i class="bi bi-pencil-fill"></i></a>
+                                                class="btn btn-primary btn-sm" title="Editar"><i
+                                                    class="bi bi-pencil-fill"></i></a>
                                         </span>
                                         <span class="list-inline-item mb-2">
                                             <form action="{{ route('colaborador.delete', $colaborador->id) }}"
@@ -50,7 +51,9 @@
                                             </form>
                                         </span>
                                         <span class="list-item-item mb-2">
-                                            <a href="{{ !$colaborador->desempenho ? route('colaborador.desempenho.new', $colaborador->id) : route('colaborador.desempenho.edit', [$colaborador->id, $colaborador->desempenho->id])}}" class="btn btn-secondary btn-sm" title="Avaliar"><i class="bi bi-person-bounding-box"></i></a>
+                                            <a href="{{ !$colaborador->desempenho ? route('colaborador.desempenho.new', $colaborador->id) : route('colaborador.desempenho.edit', [$colaborador->id, $colaborador->desempenho->id]) }}"
+                                                class="btn {{ $colaborador->desempenho ? 'btn-info' : 'btn-secondary' }} btn-sm"
+                                                title="Avaliar"><i class="bi bi-chat-square-dots-fill"></i></a>
                                         </span>
                                     </td>
                                 </tr>
@@ -59,13 +62,19 @@
                     </table>
                 </div>
             </div>
+            <nav class="mt-3">
+                <ul class="pagination justify-content-center">
+                    <li>
+                        {{ $colaboradores->appends(request()->except('_token'))->links() }}
+                    </li>
+                </ul>
+            </nav>
+        @else
+            <div class="card-body">
+                <div>
+                    <h4>Nenhum colaborador cadastrado.</h4>
+                </div>
+            </div>
         @endif
-        <nav class="mt-3">
-            <ul class="pagination justify-content-center">
-                <li class="">
-                    {{ $colaboradores->appends(request()->except('_token'))->links() }}
-                </li>
-            </ul>
-        </nav>
     </div>
 @endsection
