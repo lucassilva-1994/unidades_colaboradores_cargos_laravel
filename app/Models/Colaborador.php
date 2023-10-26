@@ -8,6 +8,7 @@ class Colaborador extends Model
 {
     protected $table = 'colaboradores';
     protected $fillable = ['id','unidade_id','cargo_id','nome','cpf','email'];
+    protected $with = ['unidade','cargo','cargos'];
     public static function createOrUpdate(array $data){
         if(!isset($data['id'])){
             HelperModel::setData($data, Colaborador::class);

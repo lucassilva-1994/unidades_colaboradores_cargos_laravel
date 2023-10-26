@@ -7,6 +7,7 @@ class CargoColaborador extends Model
 {
     protected $table = 'cargo_colaborador';
     protected $fillable = ['id','cargo_id','colaborador_id','nota_desempenho'];
+    protected $with = ['cargos','colaboradores'];
     public $timestamps = false;
 
     public function getNotaDesempenhoAttribute(){

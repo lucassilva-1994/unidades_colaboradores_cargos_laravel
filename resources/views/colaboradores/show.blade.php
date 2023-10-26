@@ -8,7 +8,7 @@
                 Novo</a>
         </div>
     </div>
-    <div class="card mt-3">
+    <div class="card">
         <div class="card-header">
             <h5>Colaboradores ({{ $colaboradores->count() }})</h5>
         </div>
