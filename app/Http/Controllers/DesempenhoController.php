@@ -10,7 +10,7 @@ use App\Models\HelperModel;
 class DesempenhoController extends Controller
 {
     public function show(){
-        $desempenhos = CargoColaborador::orderByDesc('nota_desempenho')->paginate(10);
+        $desempenhos = CargoColaborador::orderByDesc('nota_desempenho')->paginate(100);
         return view('colaboradores.desempenho.show',compact('desempenhos'));
     }
 

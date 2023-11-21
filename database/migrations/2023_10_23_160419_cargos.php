@@ -13,7 +13,7 @@ class Cargos extends Migration
             $table->bigIncrements('id');
             $table->string('cargo');
             $table->dateTime('created_at');
-            $table->dateTime('updated_at');
+            $table->dateTime('updated_at')->nullable();
         });
     }
     public function down()
