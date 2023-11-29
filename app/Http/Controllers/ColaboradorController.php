@@ -10,7 +10,7 @@ use App\Models\Unidade;
 class ColaboradorController extends Controller
 {
     public function show(){
-        $colaboradores = Colaborador::orderByDesc('id')->paginate(10);
+        $colaboradores = Colaborador::orderByDesc('id')->paginate(15);
         return view('colaboradores.show',compact('colaboradores'));
     }
 

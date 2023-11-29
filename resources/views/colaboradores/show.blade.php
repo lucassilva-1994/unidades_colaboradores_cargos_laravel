@@ -15,7 +15,7 @@
         @if ($colaboradores->isNotEmpty())
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -28,11 +28,11 @@
                         </thead>
                         <tbody>
                             @foreach ($colaboradores as $colaborador)
-                                <tr>
-                                    <td>{{ mb_strimwidth( $colaborador->nome, 0,25, "...")}}</td>
+                                <tr  class="text-nowrap">
+                                    <td>{{ $colaborador->nome }}</td>
                                     <td>{{ $colaborador->cpf }}</td>
-                                    <td>{{ mb_strimwidth( $colaborador->email, 0,25, "...")}}</td>
-                                    <td>{{ mb_strimwidth( $colaborador->unidade->nome_fantasia, 0,25, "...")}}</td>
+                                    <td>{{$colaborador->email}}</td>
+                                    <td>{{ $colaborador->unidade->nome_fantasia}}</td>
                                     <td>{{ $colaborador->cargo->cargo }}</td>
                                     <td class="list-inline" style="width: 15%">
                                         <span class="list-inline-item mb-2">

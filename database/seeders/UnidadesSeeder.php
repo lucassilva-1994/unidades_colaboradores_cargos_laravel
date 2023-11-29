@@ -15,11 +15,15 @@ class UnidadesSeeder extends Seeder
         $faker = Faker::create('pt_BR');
         for ($i = 0; $i < 150; $i++) {
             Unidade::create([
-                'nome_fantasia' => $faker->unique()->company(),
-                'razao_social' => $faker->unique()->company,
+                'nome_fantasia' => self::mudarNome($faker->unique()->company()),
+                'razao_social' => self::mudarNome($faker->unique()->company()),
                 'cnpj' => Generator::cnpj(true),
                 'created_at' => $faker->dateTimeThisYear
             ]);
         }
+    }
+
+    public static function mudarNome($nome){
+        return str_replace(['-','.'],' ',$nome);
     }
 }

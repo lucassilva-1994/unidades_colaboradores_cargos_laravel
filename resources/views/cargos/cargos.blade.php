@@ -34,7 +34,7 @@
         @if ($cargos->isNotEmpty())
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Cargo</th>
@@ -45,7 +45,7 @@
                         </thead>
                         <tbody>
                             @foreach ($cargos as $cargo)
-                                <tr>
+                                <tr  class="text-nowrap">
                                     <td>{{ mb_strimwidth( $cargo->cargo, 0,30, "...")}}</td>
                                     <td>{{ $cargo->colaboradores->count() }}</td>
                                     <td>{{ $cargo->created_at }}</td>

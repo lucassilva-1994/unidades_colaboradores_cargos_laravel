@@ -9,7 +9,7 @@
         @if ($desempenhos->isNotEmpty())
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -23,11 +23,11 @@
                         </thead>
                         <tbody>
                             @foreach ($desempenhos as $desempenho)
-                                <tr>
+                                <tr class="text-nowrap">
                                     <td>{{ $desempenho->colaboradores->nome }}</td>
                                     <td>{{ $desempenho->colaboradores->cpf }}</td>
-                                    <td>{{ mb_strimwidth( $desempenho->colaboradores->email, 0,25, "...")}}</td>
-                                    <td>{{ mb_strimwidth( $desempenho->colaboradores->unidade->nome_fantasia, 0,25, "...")}}</td>
+                                    <td>{{ $desempenho->colaboradores->email}}</td>
+                                    <td>{{ $desempenho->colaboradores->unidade->nome_fantasia}}</td>
                                     <td>{{ $desempenho->cargos->cargo }}</td>
                                     <td>{{ $desempenho->nota_desempenho }}</td>
                                     <td>

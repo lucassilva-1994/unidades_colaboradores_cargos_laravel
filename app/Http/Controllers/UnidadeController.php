@@ -8,7 +8,7 @@ use App\Models\Unidade;
 class UnidadeController extends Controller
 {
     public function show(){
-        $unidades = Unidade::orderByDesc('id')->paginate(10);
+        $unidades = Unidade::orderByDesc('id')->paginate(15);
         return view('unidades.show', compact('unidades'));
     }
 

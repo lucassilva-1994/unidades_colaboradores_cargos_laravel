@@ -17,7 +17,7 @@
     @if ($unidades->isNotEmpty())
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -30,10 +30,10 @@
                     </thead>
                     <tbody>
                         @foreach ($unidades as $unidade)
-                            <tr>
+                            <tr class="text-nowrap">
                                 <td>{{ $unidade->id }}</td>
-                                <td>{{ mb_strimwidth( $unidade->nome_fantasia, 0,30, "...")}}</td>
-                                <td>{{ mb_strimwidth( $unidade->razao_social, 0,30, "...")}}</td>
+                                <td>{{ $unidade->nome_fantasia}}</td>
+                                <td>{{ $unidade->razao_social}}</td>
                                 <td>{{ $unidade->cnpj }}</td>
                                 <td>{{ $unidade->colaboradores->count() }}</td>
                                 <td class="list-inline">
