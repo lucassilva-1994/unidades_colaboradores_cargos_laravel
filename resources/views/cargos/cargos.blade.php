@@ -46,7 +46,7 @@
                         <tbody>
                             @foreach ($cargos as $cargo)
                                 <tr  class="text-nowrap">
-                                    <td>{{ mb_strimwidth( $cargo->cargo, 0,30, "...")}}</td>
+                                    <td>{{ $cargo->cargo}}</td>
                                     <td>{{ $cargo->colaboradores->count() }}</td>
                                     <td>{{ $cargo->created_at }}</td>
                                     <td class="list-inline">
@@ -69,6 +69,13 @@
                     </table>
                 </div>
             </div>
+            <nav class="mt-3">
+                <ul class="pagination justify-content-center">
+                    <li>
+                        {{ $cargos->appends(request()->except('_token'))->links() }}
+                    </li>
+                </ul>
+            </nav>
             <div class="card-footer">
                 <div class="d-flex  justify-content-lg-end">
                     <strong>{{ $cargos->count() }} registros encontrados.</strong>

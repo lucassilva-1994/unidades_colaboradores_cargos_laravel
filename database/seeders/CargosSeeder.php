@@ -12,9 +12,9 @@ class CargosSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        for($i=0;$i<50;$i++){
+        for($i=0;$i<1000;$i++){
             Cargo::create([
-                'cargo' => $faker->jobTitle(),
+                'cargo' => $faker->unique()->jobTitle(),
                 'created_at' => $faker->dateTimeThisYear
             ]);
         }

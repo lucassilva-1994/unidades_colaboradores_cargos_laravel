@@ -13,7 +13,7 @@ class UnidadesSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('pt_BR');
-        for ($i = 0; $i < 150; $i++) {
+        for ($i = 0; $i < 250; $i++) {
             Unidade::create([
                 'nome_fantasia' => self::mudarNome($faker->unique()->company()),
                 'razao_social' => self::mudarNome($faker->unique()->company()),

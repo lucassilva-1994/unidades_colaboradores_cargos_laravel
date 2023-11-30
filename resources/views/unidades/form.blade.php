@@ -53,7 +53,7 @@
             </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -65,7 +65,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($unidades as $unidade)
-                                    <tr>
+                                    <tr  class="text-nowrap">
                                         <td>{{ $unidade->id }}</td>
                                         <td>{{ $unidade->nome_fantasia }}</td>
                                         <td>{{ $unidade->razao_social }}</td>

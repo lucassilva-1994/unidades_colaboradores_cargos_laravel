@@ -16,7 +16,7 @@ class Unidades extends Migration
             $table->string('razao_social')->unique();
             $table->string('cnpj',18)->unique();
             $table->dateTime('created_at');
-            $table->dateTime('updated_at');
+            $table->dateTime('updated_at')->nullable();
         });
     }
 
