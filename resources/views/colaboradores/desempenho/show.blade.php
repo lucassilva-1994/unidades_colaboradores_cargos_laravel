@@ -24,14 +24,14 @@
                         <tbody>
                             @foreach ($desempenhos as $desempenho)
                                 <tr class="text-nowrap">
-                                    <td>{{ $desempenho->colaboradores->nome }}</td>
-                                    <td>{{ $desempenho->colaboradores->cpf }}</td>
-                                    <td>{{ $desempenho->colaboradores->email}}</td>
-                                    <td>{{ $desempenho->colaboradores->unidade->nome_fantasia}}</td>
-                                    <td>{{ $desempenho->cargos->cargo }}</td>
+                                    <td>{{ $desempenho->colaborador->nome }}</td>
+                                    <td>{{ $desempenho->colaborador->cpf }}</td>
+                                    <td>{{ $desempenho->colaborador->email}}</td>
+                                    <td>{{ $desempenho->colaborador->unidade->nome_fantasia}}</td>
+                                    <td>{{ $desempenho->colaborador->cargo->cargo }}</td>
                                     <td>{{ $desempenho->nota_desempenho }}</td>
                                     <td>
-                                        <a href="{{ route('colaborador.desempenho.edit', [$desempenho->colaboradores->id, $desempenho->id]) }}"
+                                        <a href="{{ route('colaborador.desempenho.edit', [$desempenho->colaborador->id, $desempenho->id]) }}"
                                             class="btn btn-primary btn-sm" title="Editar"><i class="bi bi-pencil-fill"></i></a>
                                     </td>
                                 </tr>

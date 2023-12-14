@@ -31,9 +31,9 @@
                                 <tr  class="text-nowrap">
                                     <td>{{ $colaborador->nome }}</td>
                                     <td>{{ $colaborador->cpf }}</td>
-                                    <td>{{$colaborador->email}}</td>
+                                    <td>{{ $colaborador->email }}</td>
                                     <td>{{ $colaborador->unidade->nome_fantasia}}</td>
-                                    <td>{{ $colaborador->cargo->cargo }}</td>
+                                    <td>{{ str($colaborador->cargo->cargo)->words(4) }}</td>
                                     <td class="list-inline" style="width: 15%">
                                         <span class="list-inline-item mb-2">
                                             <a href="{{ route('colaborador.edit', $colaborador->id) }}"

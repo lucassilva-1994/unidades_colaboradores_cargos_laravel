@@ -9,7 +9,7 @@ class CargoController extends Controller
 {
     private function cargos(int $id = null)
     {
-        $cargos = Cargo::with('colaboradores')->withCount('colaboradores')->orderByDesc('colaboradores_count','DESC')->paginate(20);
+        $cargos = Cargo::with('colaboradores')->withCount('colaboradores')->orderByDesc('colaboradores_count','DESC')->paginate(10);
         $cargo = Cargo::whereId($id)->first();
         return view('cargos.cargos', compact('cargos', 'cargo'));
     }

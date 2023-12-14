@@ -10,12 +10,12 @@ use App\Models\Unidade;
 class ColaboradorController extends Controller
 {
     public function show(){
-        $colaboradores = Colaborador::with('desempenho')->orderByDesc('id')->paginate(50);
+        $colaboradores = Colaborador::with('desempenho','cargo','unidade')->orderByDesc('id')->paginate(50);
         return view('colaboradores.show',compact('colaboradores'));
     }
 
     private function colaboradores(int $id = null){
-        $colaboradores = Colaborador::orderByDesc('id')->limit(10)->get();
+        $colaboradores = Colaborador::with('unidade','cargo')->orderByDesc('id')->limit(10)->get();
         $colaborador = Colaborador::whereId($id)->first();
         $unidades = $this->getUnidades();
         $cargos = $this->getcargos();

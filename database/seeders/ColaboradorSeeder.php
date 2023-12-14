@@ -14,34 +14,31 @@ class ColaboradorSeeder extends Seeder
 {
     public function run()
     {
-        $faker = Faker::create('pt_BR');
         $unidades = Unidade::get();
         $cargos = Cargo::get();
         for($i=0;$i < 20000;$i++){
-            $name = $faker->unique()->name();
+            $name = fake()->unique()->name();
             $cpfUnique = Generator::cpf(true);
-            $cpf = Colaborador::where('cpf', $cpfUnique)->exists();
-            if(!$cpf){
+            $emailUnique = self::generateEmail($name);
+            $cpf = Colaborador::whereCpf($cpfUnique)->exists();
+            $email = Colaborador::whereEmail($emailUnique)->exists();
+            if(!$cpf && !$email){
                 Colaborador::create([
                     'unidade_id' => Arr::random($unidades->pluck('id')->toArray()),
                     'cargo_id' => Arr::random($cargos->pluck('id')->toArray()),
                     'nome' => $name,
                     'cpf' =>  $cpfUnique,
-                    'email' => self::removeAccents($name),
-                    'created_at' => $faker->dateTime
+                    'email' => $emailUnique,
+                    'created_at' => fake()->dateTime()
                 ]);
             }
         }
     }
 
-    private static function removeAccents($name){
-        $emails = [ 
-            '@gmail.com','@outlook.com','@hotmail.com','@live.com','@msn.com','@yahoo.com',
-            '@mail.com','@terra.com.br','@uol.com.br','@ig.com.br','@r7.com'
-        ];
-        $faker = Faker::create('pt_BR');
+    private static function generateEmail($name)
+    {
         $name = iconv('UTF-8', 'ASCII//TRANSLIT', $name);
-        $name = preg_replace('/[^a-zA-Z0-9]/', '', strtolower(str_replace([' ','Dr.','Sr.','Srta.','Sra.'], '', $name)));
-        return $name.Arr::random(['_','.','-']).rand(1,50000).'@'.$faker->unique()->domainName();
+        $name =  preg_replace('/[^a-zA-Z0-9]/', '', strtolower(str_replace([' ', 'Dr.', 'Sr.', 'Srta.', 'Sra.'], '', $name)));
+        return $name . '@' . Arr::random([fake()->freeEmailDomain()]);
     }
 }
