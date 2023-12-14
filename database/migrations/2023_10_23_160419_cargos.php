@@ -10,7 +10,8 @@ class Cargos extends Migration
     public function up()
     {
         Schema::create($this->table, function(Blueprint $table){
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->bigInteger('order');
             $table->string('cargo');
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();

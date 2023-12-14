@@ -11,10 +11,8 @@ class CargoColaborador extends Migration
     {
         Schema::create($this->table, function(Blueprint $table){
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('cargo_id');
-            $table->unsignedBigInteger('colaborador_id');
-            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('cascade');
-            $table->foreign('colaborador_id')->references('id')->on('colaboradores')->onDelete('cascade');
+            $table->foreignUuid('cargo_id')->references('id')->on('cargos')->onDelete('cascade');
+            $table->foreignUuid('colaborador_id')->references('id')->on('colaboradores')->onDelete('cascade');
             $table->decimal('nota_desempenho',3,1);
         });
     }

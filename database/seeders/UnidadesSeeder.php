@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\HelperModel;
 use App\Models\Unidade;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -12,14 +13,13 @@ class UnidadesSeeder extends Seeder
 
     public function run()
     {
-        $faker = Faker::create('pt_BR');
         for ($i = 0; $i < 250; $i++) {
-            Unidade::create([
-                'nome_fantasia' => self::mudarNome($faker->unique()->company()),
-                'razao_social' => self::mudarNome($faker->unique()->company()),
+            HelperModel::setData([
+                'nome_fantasia' => self::mudarNome(fake()->unique()->company()),
+                'razao_social' => self::mudarNome(fake()->unique()->company()),
                 'cnpj' => Generator::cnpj(true),
-                'created_at' => $faker->dateTimeThisYear
-            ]);
+                'created_at' => fake()->dateTimeThisYear
+            ],Unidade::class);
         }
     }
 

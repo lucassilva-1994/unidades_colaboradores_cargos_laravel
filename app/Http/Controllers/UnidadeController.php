@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UnidadeRequest;
+use App\Models\HelperModel;
 use App\Models\Unidade;
 
 class UnidadeController extends Controller
@@ -12,9 +13,9 @@ class UnidadeController extends Controller
         return view('unidades.show', compact('unidades'));
     }
 
-    private function unidades(int $id = null){
-        $unidades = Unidade::orderByDesc('id')->limit(10)->get();
-        $unidade = Unidade::whereId($id)->first();
+    private function unidades(string $id = null){
+        $unidades = Unidade::orderByDesc('order')->limit(10)->get();
+        $unidade = Unidade::find($id);
         return view('unidades.form', compact('unidade','unidades'));
     }
 
@@ -26,29 +27,27 @@ class UnidadeController extends Controller
         return $this->unidades();
     }
 
-    public function edit(int $id){
+    public function edit(string $id){
         return $this->unidades($id);
     }
 
     public function create(UnidadeRequest $request){
         $request->validate(
-            [ 'nome_fantasia' => 'unique:unidades,nome_fantasia', 'razao_social' => 'unique:unidades,razao_social', 'cnpj' => 'unique:unidades,cnpj'],
-            [ 'nome_fantasia.unique' => 'Nome fantasia já cadastrado.', 'razao_social.unique' => 'Razão social já cadastrado.', 'cnpj.unique' => 'CNPJ já cadastrado.']
+            [ 'nome_fantasia' => 'unique:unidades,nome_fantasia', 'razao_social' => 'unique:unidades,razao_social', 'cnpj' => 'unique:unidades,cnpj']
         );
-        if(Unidade::createOrUpdate($request->except(['_token'])))
+        if(HelperModel::setData($request->except('_token'),Unidade::class))
             return $this->redirect('success','Salvo com sucesso.');
-        dd('parou aqui.');
         return $this->redirect('error','Falha ao salvar.');
     }
 
     public function update(UnidadeRequest $request){
-        if(Unidade::createOrUpdate($request->only('id','nome_fantasia','razao_social','cnpj')))
+        if(HelperModel::updateData($request->except('id','_method','_token'),Unidade::class,['id' => $request->id]))
             return $this->redirect('success','Salvo com sucesso.');
         return $this->redirect('error','Falha ao salvar.');
     }
 
-    public function delete(int $id){
-        if(Unidade::whereId($id)->delete())
+    public function delete(string $id){
+        if(Unidade::find($id)->delete())
             return $this->redirect('success','Removido com sucesso.');
         return $this->redirect('error','Falha ao remover.');
     }

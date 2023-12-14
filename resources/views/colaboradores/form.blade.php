@@ -17,7 +17,7 @@
         </div>
         <div class="card-body">
             <form method="post"
-                action="{{ $colaborador ? route('colaborador.update', $colaborador->id) : route('colaborador.create') }}"
+                action="{{ $colaborador ? route('colaborador.update') : route('colaborador.create') }}"
                 class="row">
                 @csrf
                 @if ($colaborador)

@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             <form class="row" method="post"
-                action="{{ $cargo ? route('cargo.update', $cargo->id) : route('cargo.create') }}">
+                action="{{ $cargo ? route('cargo.update') : route('cargo.create') }}">
                 @csrf
                 @if ($cargo)
                     <input type="hidden" name="id" value="{{ $cargo->id }}" />

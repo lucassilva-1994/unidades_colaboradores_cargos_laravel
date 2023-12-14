@@ -20,7 +20,6 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Nome fantasia</th>
                             <th>Razão social</th>
                             <th>CNPJ</th>
@@ -31,7 +30,6 @@
                     <tbody>
                         @foreach ($unidades as $unidade)
                             <tr class="text-nowrap">
-                                <td>{{ $unidade->id }}</td>
                                 <td>{{ $unidade->nome_fantasia}}</td>
                                 <td>{{ $unidade->razao_social}}</td>
                                 <td>{{ $unidade->cnpj }}</td>

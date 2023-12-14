@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Cargo;
+use App\Models\HelperModel;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
@@ -12,10 +13,9 @@ class CargosSeeder extends Seeder
     public function run()
     {
         foreach(self::cargos() as $cargo){
-            Cargo::create([
-                'cargo' => $cargo,
-                'created_at' => now()
-            ]);
+            HelperModel::setData([
+                'cargo' => $cargo
+            ],Cargo::class);
         }
     }
 

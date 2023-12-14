@@ -11,7 +11,8 @@ class Unidades extends Migration
     public function up()
     {
         Schema::create($this->table, function(Blueprint $table){
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->bigInteger('order');
             $table->string('nome_fantasia')->unique();
             $table->string('razao_social')->unique();
             $table->string('cnpj',18)->unique();

@@ -12,7 +12,7 @@ class CargoColaboradorSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $colaboradores = Colaborador::limit(10000)->get();
+        $colaboradores = Colaborador::limit(4)->get();
         foreach($colaboradores as $colaborador){
             CargoColaborador::create([
                 'cargo_id' => $colaborador->cargo->id,

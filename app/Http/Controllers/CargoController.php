@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CargoRequest;
 use App\Models\Cargo;
-use Illuminate\Http\Request;
+use App\Models\HelperModel;
 
 class CargoController extends Controller
 {
-    private function cargos(int $id = null)
+    private function cargos(string $id = null)
     {
         $cargos = Cargo::with('colaboradores')->withCount('colaboradores')->orderByDesc('colaboradores_count','DESC')->paginate(10);
-        $cargo = Cargo::whereId($id)->first();
+        $cargo = Cargo::find($id);
         return view('cargos.cargos', compact('cargos', 'cargo'));
     }
 
@@ -29,36 +30,28 @@ class CargoController extends Controller
         return $this->cargos();
     }
 
-    public function edit(int $id)
+    public function edit(string $id)
     {
         return $this->cargos($id);
     }
 
-    public function create(Request $request)
+    public function create(CargoRequest $request)
     {
-        $request->validate(
-            ['cargo' => 'required'],
-            ['cargo.required' => 'O cargo é obrigatório.']
-        );
-        if (Cargo::createOrUpdate($request->except(['_token'])))
+        if (HelperModel::setData($request->only('cargo'),Cargo::class))
             return $this->redirect('success', 'Salvo com sucesso.');
         return $this->redirect('error', 'Falha ao salvar.');
     }
 
-    public function update(Request $request)
+    public function update(CargoRequest $request)
     {
-        $request->validate(
-            ['cargo' => 'required'],
-            ['cargo.required' => 'O cargo é obrigatório.']
-        );
-        if (Cargo::createOrUpdate($request->except(['_token','_method'])))
+        if (HelperModel::updateData($request->except('id','_method','_token'),Cargo::class,['id' => $request->id]))
             return $this->redirect('success', 'Salvo com sucesso.');
         return $this->redirect('error', 'Falha ao salvar.');
     }
 
-    public function delete(int $id)
+    public function delete(string $id)
     {
-        if (Cargo::whereId($id)->delete())
+        if (Cargo::find($id)->delete())
             return $this->redirect('success', 'Removido com sucesso.');
         return $this->redirect('error', 'Falha ao remover.');
     }

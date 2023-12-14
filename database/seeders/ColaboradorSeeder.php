@@ -1,13 +1,11 @@
 <?php
-
 namespace Database\Seeders;
-
 use App\Models\Cargo;
 use App\Models\Colaborador;
+use App\Models\HelperModel;
 use App\Models\Unidade;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
-use Faker\Factory as Faker;
 use Avlima\PhpCpfCnpjGenerator\Generator;
 
 class ColaboradorSeeder extends Seeder
@@ -16,21 +14,21 @@ class ColaboradorSeeder extends Seeder
     {
         $unidades = Unidade::get();
         $cargos = Cargo::get();
-        for($i=0;$i < 20000;$i++){
+        for($i=0;$i < 2000;$i++){
             $name = fake()->unique()->name();
             $cpfUnique = Generator::cpf(true);
             $emailUnique = self::generateEmail($name);
             $cpf = Colaborador::whereCpf($cpfUnique)->exists();
             $email = Colaborador::whereEmail($emailUnique)->exists();
             if(!$cpf && !$email){
-                Colaborador::create([
+                HelperModel::setData([
                     'unidade_id' => Arr::random($unidades->pluck('id')->toArray()),
                     'cargo_id' => Arr::random($cargos->pluck('id')->toArray()),
                     'nome' => $name,
                     'cpf' =>  $cpfUnique,
                     'email' => $emailUnique,
                     'created_at' => fake()->dateTime()
-                ]);
+                ],Colaborador::class);
             }
         }
     }

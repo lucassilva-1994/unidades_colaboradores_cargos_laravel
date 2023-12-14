@@ -10,16 +10,15 @@ class Colaboradores extends Migration
     public function up()
     {
         Schema::create($this->table, function(Blueprint $table){
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('unidade_id');
-            $table->unsignedBigInteger('cargo_id');
+            $table->uuid('id')->primary();
+            $table->bigInteger('order');
             $table->string('nome',100);
             $table->string('cpf',14)->unique();
             $table->string('email',100)->unique();
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
-            $table->foreign('unidade_id')->references('id')->on('unidades')->onDelete('cascade');
-            $table->foreign('cargo_id')->references('id')->on('cargos')->onDelete('cascade');
+            $table->foreignUuid('unidade_id')->references('id')->on('unidades')->onDelete('cascade');
+            $table->foreignUuid('cargo_id')->references('id')->on('cargos')->onDelete('cascade');
         });
     }
 
