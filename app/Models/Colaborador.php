@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Colaborador extends Model
 {
@@ -11,19 +14,19 @@ class Colaborador extends Model
     public $timestamps = false;
     protected $keyType = 'string';
 
-    public function unidade(){
-        return $this->belongsTo(Unidade::class,'unidade_id','id');
+    public function unidade():BelongsTo{
+        return $this->belongsTo(Unidade::class);
     }
 
-    public function cargo(){
-        return $this->belongsTo(Cargo::class,'cargo_id','id');
+    public function cargo():BelongsTo{
+        return $this->belongsTo(Cargo::class);
     }
 
-    public function cargos(){
-        return $this->belongsToMany(Cargo::class,'cargo_colaborador','colaborador_id','cargo_id');
+    public function cargos():BelongsToMany{
+        return $this->belongsToMany(Cargo::class);
     }
 
-    public function desempenho(){
-        return $this->hasOne(CargoColaborador::class,'colaborador_id','id');
+    public function desempenho():HasOne{
+        return $this->hasOne(CargoColaborador::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cargo extends Model
 {
@@ -19,7 +20,7 @@ class Cargo extends Model
         return date("d/m/Y H:i:s", strtotime($this->attributes['updated_at']));
     }
 
-    public function colaboradores(){
+    public function colaboradores():HasMany{
         return $this->hasMany(Colaborador::class);
     }
 }

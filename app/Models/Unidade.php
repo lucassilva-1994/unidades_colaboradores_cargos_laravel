@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Unidade extends Model
 {
@@ -10,7 +11,7 @@ class Unidade extends Model
     public $timestamps = false;
     protected $keyType = 'string';
     
-    public function colaboradores(){
-        return $this->hasMany(Colaborador::class,'unidade_id','id');
+    public function colaboradores():HasMany{
+        return $this->hasMany(Colaborador::class);
     }
 }
