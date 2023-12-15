@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UnidadeRequest;
-use App\Models\HelperModel;
-use App\Models\Unidade;
 use App\Helpers\Redirect;
+use App\Helpers\Model;
+use App\Http\Requests\UnidadeRequest;
+use App\Models\Unidade;
+
 
 class UnidadeController extends Controller
 {
     use Redirect;
+    use Model;
     public function show(){
         $unidades = Unidade::with('colaboradores')->withCount('colaboradores')->orderByDesc('colaboradores_count','DESC')->paginate(20);
         return view('unidades.show', compact('unidades'));
@@ -33,13 +35,13 @@ class UnidadeController extends Controller
         $request->validate(
             [ 'nome_fantasia' => 'unique:unidades,nome_fantasia', 'razao_social' => 'unique:unidades,razao_social', 'cnpj' => 'unique:unidades,cnpj']
         );
-        if(HelperModel::setData($request->except('_token'),Unidade::class))
+        if(self::setData($request->except('_token'),Unidade::class))
             return self::redirect('success','criado');
         return self::redirect('error','criar');
     }
 
     public function update(UnidadeRequest $request){
-        if(HelperModel::updateData($request->except('id','_method','_token'),Unidade::class,['id' => $request->id]))
+        if(self::updateData($request->except('id','_method','_token'),Unidade::class,['id' => $request->id]))
             return self::redirect('success','atualizado');
         return self::redirect('error','atualizar');
     }

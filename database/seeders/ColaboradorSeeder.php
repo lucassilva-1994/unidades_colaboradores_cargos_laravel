@@ -1,8 +1,9 @@
 <?php
 namespace Database\Seeders;
+
+use App\Helpers\Model;
 use App\Models\Cargo;
 use App\Models\Colaborador;
-use App\Models\HelperModel;
 use App\Models\Unidade;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
@@ -10,6 +11,7 @@ use Avlima\PhpCpfCnpjGenerator\Generator;
 
 class ColaboradorSeeder extends Seeder
 {
+    use Model;
     public function run()
     {
         $unidades = Unidade::get();
@@ -21,7 +23,7 @@ class ColaboradorSeeder extends Seeder
             $cpf = Colaborador::whereCpf($cpfUnique)->exists();
             $email = Colaborador::whereEmail($emailUnique)->exists();
             if(!$cpf && !$email){
-                HelperModel::setData([
+                self::setData([
                     'unidade_id' => Arr::random($unidades->pluck('id')->toArray()),
                     'cargo_id' => Arr::random($cargos->pluck('id')->toArray()),
                     'nome' => $name,

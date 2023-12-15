@@ -10,7 +10,7 @@ class CargoColaboradorSeeder extends Seeder
 {
     public function run()
     {
-        $colaboradores = Colaborador::limit(1000)->get();
+        $colaboradores = Colaborador::inRandomOrder()->take(1000)->get();
         foreach($colaboradores as $colaborador){
             if(!CargoColaborador::whereColaboradorId($colaborador->id)->exists()){
                 CargoColaborador::create([

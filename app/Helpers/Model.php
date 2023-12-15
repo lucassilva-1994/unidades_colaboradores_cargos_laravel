@@ -1,12 +1,8 @@
 <?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
+namespace App\Helpers;
 use Ramsey\Uuid\Uuid;
 
-class HelperModel extends Model
-{
+trait Model{
     public static function setData(array $data, $model)
     {
         $data['id'] = self::setUUid();
@@ -23,7 +19,7 @@ class HelperModel extends Model
 
     private static function setUUid()
     {
-        return Uuid::uuid4();
+        return Uuid::uuid7(now());
     }
 
     private static function setOrder($model)

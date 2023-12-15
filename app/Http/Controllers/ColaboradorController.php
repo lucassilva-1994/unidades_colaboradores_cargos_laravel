@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Redirect;
+use App\Helpers\Model;
 use App\Http\Requests\ColaboradorRequest;
 use App\Models\Cargo;
 use App\Models\Colaborador;
-use App\Models\HelperModel;
 use App\Models\Unidade;
-use App\Helpers\Redirect;
+
 
 class ColaboradorController extends Controller
 {
     use Redirect;
-    
+    use Model;
     public function show(){
         $colaboradores = Colaborador::with('desempenho','cargo','unidade')->orderByDesc('order')->paginate(50);
         return view('colaboradores.show',compact('colaboradores'));
@@ -38,13 +39,13 @@ class ColaboradorController extends Controller
         $request->validate(
             ['cpf' => 'unique:colaboradores,cpf','email' => 'unique:colaboradores,email']
         );
-        if (HelperModel::setData($request->except('_method'),Colaborador::class));
+        if (self::setData($request->except('_method'),Colaborador::class));
             return self::redirect('success','criado');
         return self::redirect('error', 'criar');
     }
 
     public function update(ColaboradorRequest $request){
-        if (HelperModel::updateData($request->except(['_token','_method','id']),Colaborador::class,['id' => $request->id]))
+        if (self::updateData($request->except(['_token','_method','id']),Colaborador::class,['id' => $request->id]))
             return self::redirect('success','atualizado');
         return self::redirect('error','atualizar');
     }

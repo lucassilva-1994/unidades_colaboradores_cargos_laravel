@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\Model;
 use App\Models\Cargo;
-use App\Models\HelperModel;
 use Illuminate\Database\Seeder;
 
 class CargosSeeder extends Seeder
 {
-
+    use Model;
     public function run()
     {
         foreach(self::cargos() as $cargo){
-            HelperModel::setData([
+            self::setData([
                 'cargo' => $cargo
             ],Cargo::class);
         }
