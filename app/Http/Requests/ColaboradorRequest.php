@@ -14,20 +14,8 @@ class ColaboradorRequest extends FormRequest
     public function rules(): array{
         return [
             'nome' => 'required| max:100',
-            'cpf' => 'required| between:14,15',
-            'email' => 'required| email| max: 100'
-        ];
-    }
-
-    public function messages(): array{
-        return [
-            'nome.required' => 'Nome obrigatório.',
-            'nome.max' => 'O nome pode ter no máximo :max caracteres.',
-            'cpf.required' => 'CPF obrigatório.',
-            'cpf.between' => 'CPF inválido.',
-            'email.required' => 'Email obrigatório.',
-            'email.email' => 'Email inválido.',
-            'email.max' => 'Email pode ter no máximo :max carcteres.'
+            'cpf' => 'required| between:14,15|unique:colaboradores,cpf',
+            'email' => 'required| email| max: 100|unique:colaboradores,email'
         ];
     }
 }
