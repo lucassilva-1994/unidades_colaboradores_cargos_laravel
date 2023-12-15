@@ -14,8 +14,8 @@ class ColaboradorRequest extends FormRequest
     public function rules(): array{
         return [
             'nome' => 'required| max:100',
-            'cpf' => 'required| between:14,15|unique:colaboradores,cpf',
-            'email' => 'required| email| max: 100|unique:colaboradores,email'
+            'cpf' => 'required| between:14,15',
+            'email' => 'required| email| max: 100'
         ];
     }
 }

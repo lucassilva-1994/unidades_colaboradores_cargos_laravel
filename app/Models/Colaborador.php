@@ -22,10 +22,6 @@ class Colaborador extends Model
         return $this->belongsTo(Cargo::class);
     }
 
-    public function cargos():BelongsToMany{
-        return $this->belongsToMany(Cargo::class);
-    }
-
     public function desempenho():HasOne{
         return $this->hasOne(CargoColaborador::class);
     }

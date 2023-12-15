@@ -8,9 +8,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $this->call(CargosSeeder::class);
-        $this->call(UnidadesSeeder::class);
-        $this->call(ColaboradorSeeder::class);
-        $this->call(CargoColaboradorSeeder::class);
+        $this->call([
+            CargosSeeder::class,
+            UnidadesSeeder::class,
+            ColaboradorSeeder::class,
+            CargoColaboradorSeeder::class
+        ]);
     }
 }

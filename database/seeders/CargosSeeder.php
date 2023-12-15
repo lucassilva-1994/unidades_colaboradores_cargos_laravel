@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Cargo;
 use App\Models\HelperModel;
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 
 class CargosSeeder extends Seeder
 {

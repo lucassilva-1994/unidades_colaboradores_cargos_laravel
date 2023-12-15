@@ -14,7 +14,7 @@ class ColaboradorSeeder extends Seeder
     {
         $unidades = Unidade::get();
         $cargos = Cargo::get();
-        for($i=0;$i < 2000;$i++){
+        for($i=0;$i < 10000;$i++){
             $name = fake()->unique()->name();
             $cpfUnique = Generator::cpf(true);
             $emailUnique = self::generateEmail($name);

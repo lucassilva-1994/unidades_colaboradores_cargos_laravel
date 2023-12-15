@@ -12,9 +12,9 @@ class UnidadeRequest extends FormRequest
 
     public function rules(): array{
         return [
-           'nome_fantasia' => 'required|unique:unidades,nome_fantasia',
-           'razao_social' => 'required|unique:unidades,razao_social',
-           'cnpj' => 'required|max:18|unique:unidades,cnpj'
+           'nome_fantasia' => 'required',
+           'razao_social' => 'required',
+           'cnpj' => 'required|max:18'
         ];
     }
 }

@@ -17,18 +17,18 @@ class HelperModel extends Model
 
     public static function updateData(array $data, $model, array $where)
     {
-        if(isset($data['updated_at'])){
-            $data['updated_at'] = now();
-        }
+        $data['updated_at'] = now();
         return $model::where($where)->update($data);
     }
 
-    private static function setUUid(){
+    private static function setUUid()
+    {
         return Uuid::uuid4();
     }
 
-    private static function setOrder($model){
+    private static function setOrder($model)
+    {
         $sql = $model::latest('order')->first();
-        return $sql ? $sql->order +=1 : 1;
+        return $sql ? $sql->order += 1 : 1;
     }
 }
