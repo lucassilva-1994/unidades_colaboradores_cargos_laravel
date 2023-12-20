@@ -9,7 +9,6 @@ use App\Models\Cargo;
 use App\Models\Colaborador;
 use App\Models\Unidade;
 
-
 class ColaboradorController extends Controller
 {
     use Redirect;
@@ -36,9 +35,6 @@ class ColaboradorController extends Controller
     }
 
     public function create(ColaboradorRequest $request){
-        $request->validate(
-            ['cpf' => 'unique:colaboradores,cpf','email' => 'unique:colaboradores,email']
-        );
         if (self::setData($request->except('_method'),Colaborador::class));
             return self::redirect('success','criado');
         return self::redirect('error', 'criar');

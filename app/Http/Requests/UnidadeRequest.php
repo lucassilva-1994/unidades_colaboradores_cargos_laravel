@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UnidadeRequest extends FormRequest
 {
@@ -12,9 +13,9 @@ class UnidadeRequest extends FormRequest
 
     public function rules(): array{
         return [
-           'nome_fantasia' => 'required',
-           'razao_social' => 'required',
-           'cnpj' => 'required|max:18'
+           'nome_fantasia' => ['required','max:100',Rule::unique('unidades')->ignore($this->id)],
+           'razao_social' => ['required','max:100',Rule::unique('unidades')->ignore($this->id)],
+           'cnpj' => ['required','max:18',Rule::unique('unidades')->ignore($this->id)]
         ];
     }
 }

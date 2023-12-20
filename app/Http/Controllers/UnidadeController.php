@@ -32,9 +32,6 @@ class UnidadeController extends Controller
     }
 
     public function create(UnidadeRequest $request){
-        $request->validate(
-            [ 'nome_fantasia' => 'unique:unidades,nome_fantasia', 'razao_social' => 'unique:unidades,razao_social', 'cnpj' => 'unique:unidades,cnpj']
-        );
         if(self::setData($request->except('_token'),Unidade::class))
             return self::redirect('success','criado');
         return self::redirect('error','criar');

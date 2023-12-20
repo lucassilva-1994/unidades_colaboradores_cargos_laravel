@@ -13,7 +13,7 @@ class DesempenhoRequest extends FormRequest
 
     public function rules():array{
         return [
-            'nota_desempenho' => 'required|numeric|between:0,10'
+            'nota_desempenho' => ['required','numeric','between:0,10']
         ];
     }
 }

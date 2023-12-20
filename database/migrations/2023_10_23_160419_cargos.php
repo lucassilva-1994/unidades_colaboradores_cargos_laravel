@@ -12,7 +12,7 @@ class Cargos extends Migration
         Schema::create($this->table, function(Blueprint $table){
             $table->uuid('id')->primary();
             $table->bigInteger('order');
-            $table->string('cargo');
+            $table->string('cargo',100);
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
         });

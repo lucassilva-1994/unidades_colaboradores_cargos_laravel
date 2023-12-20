@@ -13,7 +13,7 @@ class CargoRequest extends FormRequest
     public function rules()
     {
         return [
-           'cargo' => 'required'
+           'cargo' => ['required','max:100']
         ];
     }
 }

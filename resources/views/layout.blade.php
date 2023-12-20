@@ -10,7 +10,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg mb-3" style="background-color: rgb(92, 0, 128);">
-        <div class="container">
+        <div class="container-fluid">
             <div class="collapse navbar-collapse justify-content-end" id="menu">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -33,7 +33,7 @@
             </div>
         </div>
     </nav>
-    <div class="container mt-3 mb-3">
+    <div class="container-fluid mt-3 mb-3">
         <div class="row justify-content-center">
             <div class="col-md-12 mb-3 mt-3">
                 <h1>@yield('h1')</h1>

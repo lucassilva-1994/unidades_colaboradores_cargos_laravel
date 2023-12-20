@@ -17,18 +17,17 @@ class ColaboradorSeeder extends Seeder
         $unidades = Unidade::get();
         $cargos = Cargo::get();
         for($i=0;$i < 10000;$i++){
-            $name = fake()->unique()->name();
-            $cpfUnique = Generator::cpf(true);
-            $emailUnique = self::generateEmail($name);
-            $cpf = Colaborador::whereCpf($cpfUnique)->exists();
-            $email = Colaborador::whereEmail($emailUnique)->exists();
-            if(!$cpf && !$email){
+            $name = fake()->name();
+            $cpf = Generator::cpf(true);
+            $email = self::generateEmail($name);
+            $verify = Colaborador::whereCpfOrEmail($cpf,$email)->exists();
+            if(!$verify){
                 self::setData([
                     'unidade_id' => Arr::random($unidades->pluck('id')->toArray()),
                     'cargo_id' => Arr::random($cargos->pluck('id')->toArray()),
                     'nome' => $name,
-                    'cpf' =>  $cpfUnique,
-                    'email' => $emailUnique,
+                    'cpf' =>  $cpf,
+                    'email' => $email,
                     'created_at' => fake()->dateTime()
                 ],Colaborador::class);
             }
