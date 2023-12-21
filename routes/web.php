@@ -7,7 +7,7 @@ use App\Http\Controllers\UnidadeController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(UnidadeController::class)->group(function(){
-    Route::get('/','show')->name('unidade.show');
+    Route::match(['get','post'],'/','show')->name('unidade.show');
     Route::get('unidade/new','new')->name('unidade.new');
     Route::get('unidade/edit/{id}','edit')->name('unidade.edit');
     Route::post('unidade/create','create')->name('unidade.create');
@@ -25,7 +25,7 @@ Route::controller(CargoController::class)->group(function(){
 });
 
 Route::controller(ColaboradorController::class)->group(function(){
-    Route::get('colaborador/','show')->name('colaborador.show');
+    Route::match(['get','post'],'colaborador/','show')->name('colaborador.show');
     Route::get('colaborador/new','new')->name('colaborador.new');
     Route::get('colaborador/edit/{id}','edit')->name('colaborador.edit');
     Route::post('colaborador/create','create')->name('colaborador.create');
@@ -34,7 +34,7 @@ Route::controller(ColaboradorController::class)->group(function(){
 });
 
 Route::controller(DesempenhoController::class)->group(function(){
-    Route::get('colaborador/desempenho/show','show')->name('colaborador.desempenho.show');
+    Route::match(['get','post'],'colaborador/desempenho/show','show')->name('colaborador.desempenho.show');
     Route::get('colaborador/{id}/desempenho/new', 'new')->name('colaborador.desempenho.new');
     Route::post('colaborador/{id}/desempenho/create', 'create')->name('colaborador.desempenho.create');
     Route::get('colaborador/{id}/desempenho/edit/{desempenho_id}', 'edit')->name('colaborador.desempenho.edit');

@@ -14,6 +14,16 @@
     <div class="card-header">
         <h5>Listagem de unidades ({{ $unidades->count() }})</h5>
     </div>
+    <div class="card-body">
+        <form action="{{ route('unidade.show') }}" method="post">
+            <div class="input-group">
+                @csrf
+                <input type="search" class="form-control" name="search"  value="{{ $_POST ? $_POST['search'] : '' }}"
+                    placeholder="Digite sua busca" />
+                <button class="btn btn-success" type="submit"><i class="bi bi-search"></i></button>
+            </div>
+        </form>
+    </div>
     @if ($unidades->isNotEmpty())
         <div class="card-body">
             <div class="table-responsive">
@@ -30,8 +40,8 @@
                     <tbody>
                         @foreach ($unidades as $unidade)
                             <tr class="text-nowrap">
-                                <td>{{ $unidade->nome_fantasia}}</td>
-                                <td>{{ $unidade->razao_social}}</td>
+                                <td>{{ $unidade->nome_fantasia }}</td>
+                                <td>{{ $unidade->razao_social }}</td>
                                 <td>{{ $unidade->cnpj }}</td>
                                 <td>{{ $unidade->colaboradores->count() }}</td>
                                 <td class="list-inline">

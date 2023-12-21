@@ -12,6 +12,16 @@
         <div class="card-header">
             <h5>Colaboradores ({{ $colaboradores->count() }})</h5>
         </div>
+        <div class="card-body">
+            <form action="{{ route('colaborador.show') }}" method="post">
+                <div class="input-group">
+                    @csrf
+                    <input type="search" class="form-control" name="search" value="{{ $_POST ? $_POST['search'] : '' }}"
+                        placeholder="Digite sua busca" />
+                    <button class="btn btn-success" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+        </div>
         @if ($colaboradores->isNotEmpty())
             <div class="card-body">
                 <div class="table-responsive">

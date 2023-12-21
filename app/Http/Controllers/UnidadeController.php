@@ -6,13 +6,17 @@ use App\Helpers\Redirect;
 use App\Helpers\Model;
 use App\Http\Requests\UnidadeRequest;
 use App\Models\Unidade;
-
+use Illuminate\Http\Request;
 
 class UnidadeController extends Controller
 {
     use Redirect;
     use Model;
-    public function show(){
+    public function show(Request $request){
+        if(!empty($request->search)){
+            $unidades = Unidade::search($request->search);
+            return view('unidades.show', compact('unidades'));
+        }
         $unidades = Unidade::with('colaboradores')->withCount('colaboradores')->orderByDesc('colaboradores_count','DESC')->paginate(20);
         return view('unidades.show', compact('unidades'));
     }

@@ -14,4 +14,14 @@ class Unidade extends Model
     public function colaboradores():HasMany{
         return $this->hasMany(Colaborador::class);
     }
+
+    public static function search(string $search, int $perPage = 20){
+        return self::with('colaboradores')
+        ->where('nome_fantasia','like',"%$search%")
+        ->orWhere('razao_social','like',"%$search%")
+        ->orWhere('cnpj','like',"%$search%")
+        ->withCount('colaboradores')
+        ->orderByDesc('colaboradores_count','DESC')
+        ->paginate($perPage);
+    }
 }

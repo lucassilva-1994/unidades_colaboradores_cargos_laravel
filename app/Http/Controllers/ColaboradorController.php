@@ -8,12 +8,17 @@ use App\Http\Requests\ColaboradorRequest;
 use App\Models\Cargo;
 use App\Models\Colaborador;
 use App\Models\Unidade;
+use Illuminate\Http\Request;
 
 class ColaboradorController extends Controller
 {
     use Redirect;
     use Model;
-    public function show(){
+    public function show(Request $request){
+        if(!empty($request->search)){
+            $colaboradores = Colaborador::search($request->search,10);
+            return view('colaboradores.show',compact('colaboradores'));
+        }
         $colaboradores = Colaborador::with('desempenho','cargo','unidade')->orderByDesc('order')->paginate(50);
         return view('colaboradores.show',compact('colaboradores'));
     }

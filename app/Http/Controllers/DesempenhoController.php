@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DesempenhoRequest;
 use App\Models\CargoColaborador;
 use App\Models\Colaborador;
+use Illuminate\Http\Request;
 
 class DesempenhoController extends Controller
 {
-    public function show(){
+    public function show(Request $request){
+        if(!empty($request->search)){
+            $desempenhos = CargoColaborador::search($request->search);
+            return view('colaboradores.desempenho.show',compact('desempenhos'));
+        }
         $desempenhos = CargoColaborador::with('colaborador.cargo','colaborador.unidade')->orderByDesc('nota_desempenho')->paginate(50);
         return view('colaboradores.desempenho.show',compact('desempenhos'));
     }

@@ -6,9 +6,16 @@
         <div class="card-header">
             <h5>Avaliações ({{ $desempenhos->count() }})</h5>
         </div>
+        <div class="table-responsive">
+            <form action="{{ route('colaborador.desempenho.show') }}" method="post" class="card-body">
+                <div class="input-group">
+                    @csrf
+                    <input type="search" class="form-control" name="search" value="{{ $_POST ? $_POST['search'] : '' }}" placeholder="Digite sua busca" />
+                    <button class="btn btn-success" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
         @if ($desempenhos->isNotEmpty())
             <div class="card-body">
-                <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
