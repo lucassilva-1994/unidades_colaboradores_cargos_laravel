@@ -16,6 +16,7 @@ Route::controller(UnidadeController::class)->group(function(){
 });
 
 Route::controller(CargoController::class)->group(function(){
+    Route::get('cargo/getCargos','getCargos');
     Route::get('cargo/','show')->name('cargo.show');
     Route::get('cargo/new','new')->name('cargo.new');
     Route::get('cargo/edit/{id}','edit')->name('cargo.edit');

@@ -12,8 +12,7 @@ use Illuminate\Http\Request;
 
 class ColaboradorController extends Controller
 {
-    use Redirect;
-    use Model;
+    use Redirect, Model;
     public function show(Request $request){
         if(!empty($request->search)){
             $colaboradores = Colaborador::search($request->search,10);

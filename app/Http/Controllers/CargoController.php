@@ -9,8 +9,12 @@ use App\Helpers\Redirect;
 
 class CargoController extends Controller
 {
-    use Redirect;
-    use Model;
+    use Redirect, Model;
+
+    public function getCargos(){
+        $cargos = Cargo::with('colaboradores')->get();
+        return response()->json($cargos);
+    }
     private function cargos(string $id = null)
     {
         $cargos = Cargo::with('colaboradores')->withCount('colaboradores')->orderByDesc('colaboradores_count','DESC')->paginate(10);
@@ -35,22 +39,28 @@ class CargoController extends Controller
 
     public function create(CargoRequest $request)
     {
-        if (self::setData($request->only('cargo'),Cargo::class))
-            return self::redirect('success','criado');
-        return self::redirect('error','criar');
+            try {
+                self::setData($request->only('cargo'),Cargo::class);
+                return response()->json(['message' => 'Registro criado com sucesso.']);
+            } catch (\Throwable $th) {
+                return response()->json(['message' => "Falha: $th->getMessage()"]);
+            }
     }
 
     public function update(CargoRequest $request)
     {
-        if (self::updateData($request->except('id','_method','_token'),Cargo::class,['id' => $request->id]))
-            return self::redirect('success','atualizado');
-        return self::redirect('error','atualizar');
+        try {
+            self::updateData($request->except('id','_method','_token'),Cargo::class,['id' => $request->id]);
+            return response()->json(['message' => 'Registro atualizado com sucesso.']);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => "Falha: $th->getMessage()"]);
+        }
     }
 
     public function delete(string $id)
     {
         if (Cargo::find($id)->delete())
-            return self::redirect('success','excluido');
+            return response()->json('Registro excluido com sucesso.');
         return self::redirect('error','deletar');
     }
 }

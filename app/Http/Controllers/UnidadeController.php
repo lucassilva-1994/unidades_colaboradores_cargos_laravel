@@ -10,8 +10,7 @@ use Illuminate\Http\Request;
 
 class UnidadeController extends Controller
 {
-    use Redirect;
-    use Model;
+    use Redirect, Model;
     public function show(Request $request){
         if(!empty($request->search)){
             $unidades = Unidade::search($request->search);
