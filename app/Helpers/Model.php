@@ -8,13 +8,13 @@ trait Model{
         $data['id'] = self::setUUid();
         $data['order'] = self::setOrder($model);
         $data['created_at'] = now();
-        return $model::create($data);
+        return $model::updateOrCreate($data);
     }
 
     public static function updateData(array $data, $model, array $where)
     {
         $data['updated_at'] = now();
-        return $model::where($where)->update($data);
+        return $model::updateOrCreate($where,$data);
     }
 
     private static function setUUid()

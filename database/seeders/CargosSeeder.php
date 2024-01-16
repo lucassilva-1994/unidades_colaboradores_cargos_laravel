@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Helpers\Model;
-use App\Models\Cargo;
+use App\Models\{Cargo,Unidade};
 use Illuminate\Database\Seeder;
 
 class CargosSeeder extends Seeder
@@ -11,14 +11,19 @@ class CargosSeeder extends Seeder
     use Model;
     public function run()
     {
-        foreach(self::cargos() as $cargo){
-            self::setData([
-                'cargo' => $cargo
-            ],Cargo::class);
+        $unidades = Unidade::get('id');
+        foreach ($unidades as $unidade) {
+            foreach (self::cargos() as $cargo) {
+                self::setData([
+                    'cargo' => $cargo,
+                    'unidade_id' => $unidade->id
+                ], Cargo::class);
+            }
         }
     }
 
-    private static function cargos(){
+    private static function cargos()
+    {
         return  [
             "Médico",
             "Enfermeiro",

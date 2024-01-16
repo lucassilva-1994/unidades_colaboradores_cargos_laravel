@@ -1,9 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\CargoColaborador;
-use App\Models\Colaborador;
+use App\Models\{Colaborador,CargoColaborador};
 use Illuminate\Database\Seeder;
 
 class CargoColaboradorSeeder extends Seeder

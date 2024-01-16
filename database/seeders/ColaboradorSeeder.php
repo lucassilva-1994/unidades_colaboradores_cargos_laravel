@@ -2,9 +2,7 @@
 namespace Database\Seeders;
 
 use App\Helpers\Model;
-use App\Models\Cargo;
-use App\Models\Colaborador;
-use App\Models\Unidade;
+use App\Models\{Colaborador,Unidade};
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
 use Avlima\PhpCpfCnpjGenerator\Generator;
@@ -15,21 +13,22 @@ class ColaboradorSeeder extends Seeder
     public function run()
     {
         $unidades = Unidade::get();
-        $cargos = Cargo::get();
-        for($i=0;$i < 10000;$i++){
-            $name = fake()->name();
-            $cpf = Generator::cpf(true);
-            $email = self::generateEmail($name);
-            $verify = Colaborador::whereCpfOrEmail($cpf,$email)->exists();
-            if(!$verify){
-                self::setData([
-                    'unidade_id' => Arr::random($unidades->pluck('id')->toArray()),
-                    'cargo_id' => Arr::random($cargos->pluck('id')->toArray()),
-                    'nome' => $name,
-                    'cpf' =>  $cpf,
-                    'email' => $email,
-                    'created_at' => fake()->dateTime()
-                ],Colaborador::class);
+        foreach($unidades as $unidade){
+            for($i=0;$i < 100;$i++){
+                $name = fake()->name();
+                $cpf = Generator::cpf(true);
+                $email = self::generateEmail($name);
+                $verify = Colaborador::whereCpfOrEmail($cpf,$email)->exists();
+                if(!$verify){
+                    self::setData([
+                        'unidade_id' => $unidade->id,
+                        'cargo_id' => Arr::random($unidade->cargos->pluck('id')->toArray()),
+                        'nome' => $name,
+                        'cpf' =>  $cpf,
+                        'email' => $email,
+                        'created_at' => fake()->dateTime()
+                    ],Colaborador::class);
+                }
             }
         }
     }

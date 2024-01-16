@@ -15,6 +15,7 @@ class Cargos extends Migration
             $table->string('cargo',100);
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
+            $table->foreignUuid('unidade_id')->references('id')->on('unidades')->cascadeOnDelete();
         });
     }
     public function down()

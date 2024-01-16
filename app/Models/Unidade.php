@@ -15,6 +15,10 @@ class Unidade extends Model
         return $this->hasMany(Colaborador::class);
     }
 
+    public function cargos():HasMany{
+        return $this->hasMany(Cargo::class);
+    }
+
     public static function search(string $search, int $perPage = 20){
         return self::with('colaboradores')
         ->where('nome_fantasia','like',"%$search%")
